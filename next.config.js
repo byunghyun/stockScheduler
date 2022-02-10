@@ -9,6 +9,7 @@ const withTM = require("next-transpile-modules")([
     "@fullcalendar/react",
     "@fullcalendar/timegrid",
     "@fullcalendar/resource-timeline",
+    "@fullcalendar/resource-timegrid",
   ]);
 module.exports = withTM({
     sassOptions: {
