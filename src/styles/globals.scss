@@ -12,6 +12,23 @@ body {
     font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
 }
 
+.fc-timegrid-slot-label-cushion{
+  font-size: .875rem;
+}
+
+.fc-v-event{
+  background: #6366f1!important;
+  border-color: #6366f1!important;
+}
+
+.fc-non-business {
+  background: #d1d1d163 !important;
+}
+
+.fc-col-header-cell, .fc-timegrid-axis {
+  background: white;
+}
+
 ::-webkit-scrollbar {
     width: 3px;
   }
