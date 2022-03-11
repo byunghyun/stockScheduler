@@ -1,18 +1,9 @@
-import React, { useEffect, useState } from 'react'
-import dynamic from 'next/dynamic';
-const CalendarPage = dynamic(() => import('../components/fullcalendar'), {
-    ssr: false
-});
+import React from 'react'
+import Scheduler from '../components/Templates/SchedulerTemplate';
 
 const Schedule = () => {
-  const [isWindowLoad, setWindowLoad] = useState(false);
-  useEffect(() => {
-    setWindowLoad(true);
-  }, []);
   return (
-    <>
-      {isWindowLoad && <CalendarPage key={`calendar`}/>}
-    </>
+    <Scheduler />
   )
 };
 

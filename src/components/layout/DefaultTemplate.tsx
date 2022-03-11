@@ -1,12 +1,20 @@
-import React, { Children, ReactNode } from 'react'
-import LeftNaviBar from '../menu/leftNaviBar/LeftNaviBar'
-import HeaderSearch from '../search/HeaderSearch'
+import { useRouter } from 'next/router';
+import React, { Children, ReactNode, useEffect } from 'react'
+import LeftNaviBar from '../Molecules/menu/leftNaviBar/LeftNaviBar'
+import HeaderSearch from '../Atoms/search/HeaderSearch'
+import LogoutRoundedIcon from '@mui/icons-material/LogoutRounded';
 
 type LayoutProps = {
   children: ReactNode;
 };
 
 const DefaultTemplate = ({ children }: LayoutProps ) => {
+  const router = useRouter();
+  const handleClickEvent = {
+    logOut: (event: any) => {
+        router.push('/login');
+    }
+  };
   return (
     <div className="flex w-full h-full">
       <div className="fixed z-50 w-[75px] h-full bg-[#1f2937]">
@@ -18,13 +26,17 @@ const DefaultTemplate = ({ children }: LayoutProps ) => {
                   </g>
               </svg>
           </div>
-          <div className='overflow-auto h-[calc(100%-75px)]'>
+          <div className='flex flex-col justify-between overflow-auto h-[calc(100%-75px)]'>
               <LeftNaviBar />
+              <button onClick={handleClickEvent.logOut} className='flex flex-col justify-center items-center mx-2 my-3 px-1 py-3 rounded-2xl hover:cursor-pointer'>
+                <LogoutRoundedIcon sx={{ color: '#7f8693' }} />
+                <p className='text-[11px] mt-1 text-[#7f8693]'>로그아웃</p>
+              </button>
           </div>
       </div>
       <div className='relative flex flex-col w-full min-h-[100vh] bg-[#f3f4f6]'>
           <HeaderSearch />
-          <section className='h-full ml-[75px] mt-[60px] p-5'>
+          <section className={`h-full ml-[75px] mt-[60px] ` + (router.pathname !== `/sharingWork2` && 'p-5')}>
               {children}
           </section>
       </div>

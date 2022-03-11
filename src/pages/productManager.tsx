@@ -1,10 +1,9 @@
 import React from 'react'
+import ProductManagerTemplate from '../components/Templates/ProductManagerTemplate'
 
 const ProductManager = () => {
   return (
-    <div>
-      ProductManager
-    </div>
+    <ProductManagerTemplate />
   )
 }
 

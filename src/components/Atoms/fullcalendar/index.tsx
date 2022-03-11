@@ -4,7 +4,6 @@ import resourceTimeGridPlugin from '@fullcalendar/resource-timegrid';
 import { useRef } from "react";
 
 const Calendar = () => {
-  console.log('www');
   const calendarRef = useRef(null);
   const handleClick = {
     scheduleSelect: (event: any) => {

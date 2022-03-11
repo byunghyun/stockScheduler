@@ -15,6 +15,6 @@
     "jsx": "preserve",
     "incremental": true
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "src/mocks/chartData.ts", "src/components/chart/MainChart.tsx", "src/components/chart/ChartTest.jsx", "babel.config.js"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "src/mocks/chartData.ts", "src/components/Atoms/chart/MainChart.tsx", "src/components/Atoms/chart/ChartTest.jsx", "babel.config.js"],
   "exclude": ["node_modules"]
 }
