@@ -1,8 +1,8 @@
 import '../styles/globals.scss'
 import '../styles/antdChangeStyle.scss'
 import type { AppProps } from 'next/app'
-import Header from '../components/Layout/Header';
-import DefaultTemplate from '../components/Layout/DefaultTemplate';
+import Header from '../components/layout/Header';
+import DefaultTemplate from '../components/layout/DefaultTemplate';
 import "@fullcalendar/common/main.css";
 import "@fullcalendar/daygrid/main.css";
 import "@fullcalendar/timegrid/main.css";
