@@ -5,7 +5,6 @@ import MaterialTable from 'material-table'
 const StockManagerTemplate = () => {
   return (
    <>
-     {/* <InvenReg invenRegModal={invenRegModal} changeInvenRegModal={changeInvenRegModal} invenTitle={invenTitle} /> */}
      <div className="btnGroup">
        <ButtonGroup aria-label="contained primary button group" className='mt-8'>
            <Button variant="outlined">바코드 입/출고</Button>
