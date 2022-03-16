@@ -1,10 +1,9 @@
 import React from 'react'
+import StockHistoryManagerTemplate from '../components/Templates/StockHistoryManagerTemplate'
 
 const StockHistory = () => {
   return (
-    <div>
-      
-    </div>
+    <StockHistoryManagerTemplate />
   )
 }
 

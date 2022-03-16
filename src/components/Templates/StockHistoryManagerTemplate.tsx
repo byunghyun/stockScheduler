@@ -1,34 +1,15 @@
 import React from 'react'
 import {ButtonGroup, Button} from '@material-ui/core';
 import Radio from '@mui/material/Radio';
-import { stockListMocks } from '../../mocks/stockList';
-import { stockListType } from '../../mocks/stockList/type';
+import { stockListMocks } from '../../mocks/stockList'
+import { stockListType } from '../../mocks/stockList/type'
 
-const StockManagerTemplate = () => {
-  const [selectedValue, setSelectedValue] = React.useState('a');
-  const handleChange = (event: { target: { value: React.SetStateAction<string> } }) => {
-    setSelectedValue(event.target.value);
-  };
-  const controlProps = (item: string) => ({
-    checked: selectedValue === item,
-    onChange: handleChange,
-    value: item,
-    name: 'stockManagerList',
-    inputProps: { 'aria-label': item },
-  });
+const StockHistoryManagerTemplate = () => {
   return (
    <>
-     <div className="btnGroup pb-6 ">
-       <ButtonGroup aria-label="contained primary button group" className='mt-8'>
-           {/* <Button variant="outlined">바코드 입/출고</Button> */}
-           <Button variant="outlined" color="primary">입고</Button>
-           <Button variant="outlined" color="secondary">출고</Button>
-           <Button variant="outlined">폐기</Button>
-       </ButtonGroup>
-     </div>
      <div className='flex flex-col flex-1 bg-white overflow-y-auto'>
         <header className='w-full h-[60px] leading-[60px] text-[1.25rem] pl-[1.5rem]'>
-          재고 관리
+          변경 내역 리스트
         </header>
         <div className='h-full overflow-y-auto'>
           <table className='w-full listTable flex-1'>
@@ -46,22 +27,12 @@ const StockManagerTemplate = () => {
               </tr>
             </thead>
             <tbody>
-            {stockListMocks.map((item: stockListType, index: number) => {
+              {stockListMocks.map((item, index) => {
                 return (
                   <tr key={item.stockIndex.toString()}>
-                    <td>
-                      <Radio
-                        {...controlProps('a')}
-                        sx={{
-                          color: '#6366f1',
-                          '&.Mui-checked': {
-                            color: '#6366f1',
-                          },
-                        }}
-                      />
-                    </td>
                     <td>{index + 1}</td>
-                    <td>333</td>
+                    <td>{'123'}</td>
+                    <td>{'qwf'}</td>
                     <td>333</td>
                     <td>333</td>
                     <td>333</td>
@@ -79,4 +50,4 @@ const StockManagerTemplate = () => {
   )
 }
 
-export default StockManagerTemplate
+export default StockHistoryManagerTemplate
