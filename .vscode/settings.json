@@ -22,6 +22,8 @@
     "supabase",
     "tailwindcss",
     "timegrid",
-    "wefew"
+    "wefew",
+    "xaxis",
+    "zustand"
   ]
 }
