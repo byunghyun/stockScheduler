@@ -1,7 +1,7 @@
-import FullCalendar from '@fullcalendar/react';
 import interactionPlugin from '@fullcalendar/interaction';
+import FullCalendar from '@fullcalendar/react';
 import resourceTimeGridPlugin from '@fullcalendar/resource-timegrid';
-import { useRef } from "react";
+import { useRef } from 'react';
 
 const Calendar = () => {
   const calendarRef = useRef(null);
@@ -11,18 +11,18 @@ const Calendar = () => {
     },
     dataSelect: (event: any) => {
       console.log(event);
-    }
-  }
+    },
+  };
   const handleMouseEnter = {
     scheduleHover: (event: any) => {
       // console.log(event)
     },
-  }
+  };
   const handleMouseLeave = {
     scheduleLeave: (event: any) => {
       // console.log('scheduleLeave', event);
     },
-  }
+  };
   return (
     <div className='h-full'>
       <FullCalendar
@@ -51,7 +51,7 @@ const Calendar = () => {
         headerToolbar={{
           start: 'title',
           center: '',
-          end: 'today prev,next'
+          end: 'today prev,next',
         }}
         eventMouseEnter={handleMouseEnter.scheduleHover}
         eventMouseLeave={handleMouseLeave.scheduleLeave}
@@ -59,42 +59,43 @@ const Calendar = () => {
           {
             hour: '2-digit',
             minute: '2-digit',
-            meridiem: 'short'
-          }
+            meridiem: 'short',
+          },
         ]}
         slotLabelInterval={'00:30:00'}
-        height={ '100%' }
+        height={'100%'}
         initialEvents={[
-          { title: 'nice event', start: new Date('2022-02-22 21:00:00'), end: new Date('2022-02-22 22:00:00'), resourceId: 'receiving' }
+          {
+            title: 'nice event',
+            start: new Date('2022-02-22 21:00:00'),
+            end: new Date('2022-02-22 22:00:00'),
+            resourceId: 'receiving',
+          },
         ]}
         // scrollTime='22:00'
-        events={[
-          { title: 'event 1', date: new Date('2022-02-22') },
-        ]}
+        events={[{ title: 'event 1', date: new Date('2022-02-22') }]}
         selectable
-        resourceAreaHeaderContent="Rooms"
-        resources={
-          [
-            {
-              id: 'receiving',
-              title: '입고',
-              businessHours: {
-                // daysOfWeek: [ 1, 2, 3 ], // Monday, Tuesday, Wednesday
-                startTime: '10:00',
-                endTime: '18:00'
-              }
+        resourceAreaHeaderContent='Rooms'
+        resources={[
+          {
+            id: 'receiving',
+            title: '입고',
+            businessHours: {
+              // daysOfWeek: [ 1, 2, 3 ], // Monday, Tuesday, Wednesday
+              startTime: '10:00',
+              endTime: '18:00',
             },
-            {
-              id: 'forwarding',
-              title: '출고',
-              businessHours: {
-                // daysOfWeek: [ 1, 2, 3 ], // Monday, Tuesday, Wednesday
-                startTime: '10:00',
-                endTime: '18:00'
-              }
-            }
-          ]
-        }
+          },
+          {
+            id: 'forwarding',
+            title: '출고',
+            businessHours: {
+              // daysOfWeek: [ 1, 2, 3 ], // Monday, Tuesday, Wednesday
+              startTime: '10:00',
+              endTime: '18:00',
+            },
+          },
+        ]}
       />
     </div>
   );
