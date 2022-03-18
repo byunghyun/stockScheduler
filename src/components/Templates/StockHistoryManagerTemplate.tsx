@@ -1,13 +1,14 @@
-import React from 'react'
-import {ButtonGroup, Button} from '@material-ui/core';
+import { Button, ButtonGroup } from '@material-ui/core';
 import Radio from '@mui/material/Radio';
-import { stockListMocks } from '../../mocks/stockList'
-import { stockListType } from '../../mocks/stockList/type'
+import React from 'react';
+
+import { stockListMocks } from '../../mocks/stockList';
+import { stockListType } from '../../mocks/stockList/type';
 
 const StockHistoryManagerTemplate = () => {
   return (
-   <>
-     <div className='flex flex-col flex-1 bg-white overflow-y-auto'>
+    <>
+      <div className='flex flex-col flex-1 bg-white overflow-y-auto'>
         <header className='w-full h-[60px] leading-[60px] text-[1.25rem] pl-[1.5rem]'>
           변경 내역 리스트
         </header>
@@ -47,7 +48,7 @@ const StockHistoryManagerTemplate = () => {
         </div>
       </div>
     </>
-  )
-}
+  );
+};
 
-export default StockHistoryManagerTemplate
+export default StockHistoryManagerTemplate;

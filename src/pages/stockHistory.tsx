@@ -1,10 +1,9 @@
-import React from 'react'
-import StockHistoryManagerTemplate from '../components/Templates/StockHistoryManagerTemplate'
+import React from 'react';
+
+import StockHistoryManagerTemplate from '../components/Templates/StockHistoryManagerTemplate';
 
 const StockHistory = () => {
-  return (
-    <StockHistoryManagerTemplate />
-  )
-}
+  return <StockHistoryManagerTemplate />;
+};
 
-export default StockHistory
+export default StockHistory;

@@ -1,15 +1,13 @@
-import React, { useEffect, useState } from 'react'
 import dynamic from 'next/dynamic';
+import React, { useEffect, useState } from 'react';
 const CalendarPage = dynamic(() => import('../Atoms/fullcalendar'), {
-  ssr: false
+  ssr: false,
 });
 
 const Scheduler = () => {
   return (
-    <>
-      {typeof window !== 'undefined' && <CalendarPage key={`calendar`}/>}
-    </>
-  )
-}
+    <>{typeof window !== 'undefined' && <CalendarPage key={`calendar`} />}</>
+  );
+};
 
-export default Scheduler
+export default Scheduler;

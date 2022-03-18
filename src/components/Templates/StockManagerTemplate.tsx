@@ -1,12 +1,15 @@
-import React from 'react'
-import {ButtonGroup, Button} from '@material-ui/core';
+import { Button, ButtonGroup } from '@material-ui/core';
 import Radio from '@mui/material/Radio';
+import React from 'react';
+
 import { stockListMocks } from '../../mocks/stockList';
 import { stockListType } from '../../mocks/stockList/type';
 
 const StockManagerTemplate = () => {
   const [selectedValue, setSelectedValue] = React.useState('a');
-  const handleChange = (event: { target: { value: React.SetStateAction<string> } }) => {
+  const handleChange = (event: {
+    target: { value: React.SetStateAction<string> };
+  }) => {
     setSelectedValue(event.target.value);
   };
   const controlProps = (item: string) => ({
@@ -17,16 +20,23 @@ const StockManagerTemplate = () => {
     inputProps: { 'aria-label': item },
   });
   return (
-   <>
-     <div className="btnGroup pb-6 ">
-       <ButtonGroup aria-label="contained primary button group" className='mt-8'>
-           {/* <Button variant="outlined">바코드 입/출고</Button> */}
-           <Button variant="outlined" color="primary">입고</Button>
-           <Button variant="outlined" color="secondary">출고</Button>
-           <Button variant="outlined">폐기</Button>
-       </ButtonGroup>
-     </div>
-     <div className='flex flex-col flex-1 bg-white overflow-y-auto'>
+    <>
+      <div className='btnGroup pb-6 '>
+        <ButtonGroup
+          aria-label='contained primary button group'
+          className='mt-8'
+        >
+          {/* <Button variant="outlined">바코드 입/출고</Button> */}
+          <Button variant='outlined' color='primary'>
+            입고
+          </Button>
+          <Button variant='outlined' color='secondary'>
+            출고
+          </Button>
+          <Button variant='outlined'>폐기</Button>
+        </ButtonGroup>
+      </div>
+      <div className='flex flex-col flex-1 bg-white overflow-y-auto'>
         <header className='w-full h-[60px] leading-[60px] text-[1.25rem] pl-[1.5rem]'>
           재고 관리
         </header>
@@ -46,7 +56,7 @@ const StockManagerTemplate = () => {
               </tr>
             </thead>
             <tbody>
-            {stockListMocks.map((item: stockListType, index: number) => {
+              {stockListMocks.map((item: stockListType, index: number) => {
                 return (
                   <tr key={item.stockIndex.toString()}>
                     <td>
@@ -76,7 +86,7 @@ const StockManagerTemplate = () => {
         </div>
       </div>
     </>
-  )
-}
+  );
+};
 
-export default StockManagerTemplate
+export default StockManagerTemplate;

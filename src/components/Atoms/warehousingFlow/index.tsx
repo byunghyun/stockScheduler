@@ -1,15 +1,32 @@
-import React, { ReactElement, useEffect, useState } from 'react';
-import { Timeline } from 'antd';
 import { ClockCircleOutlined } from '@ant-design/icons';
+import { Timeline } from 'antd';
 import dayjs from 'dayjs';
+import React, { ReactElement, useEffect, useState } from 'react';
+
 import { useDashboardStore } from '../../../zustand/dashBoard';
 
 const rows = [
-  {state: 'late', text: 'Create a services site', date: new Date().valueOf()},
-  {state: 'schedule', text: 'Create a services site', date: new Date().valueOf()},
-  {state: 'pending', text: 'Create a services site', date: new Date().valueOf()},
-  {state: 'completed', text: 'Create a services site', date: new Date().valueOf()},
-  {state: 'reject', text: 'Create a services site', date: new Date().valueOf()},
+  { state: 'late', text: 'Create a services site', date: new Date().valueOf() },
+  {
+    state: 'schedule',
+    text: 'Create a services site',
+    date: new Date().valueOf(),
+  },
+  {
+    state: 'pending',
+    text: 'Create a services site',
+    date: new Date().valueOf(),
+  },
+  {
+    state: 'completed',
+    text: 'Create a services site',
+    date: new Date().valueOf(),
+  },
+  {
+    state: 'reject',
+    text: 'Create a services site',
+    date: new Date().valueOf(),
+  },
 ];
 
 interface returnStylesType {
@@ -31,18 +48,20 @@ const WarehousingFlow = () => {
           switch (items.state) {
             case 'late':
               returnStyles.color = 'red';
-              returnStyles.dot = < ClockCircleOutlined className = "timeline-clock-icon" />
+              returnStyles.dot = (
+                <ClockCircleOutlined className='timeline-clock-icon' />
+              );
               break;
             case 'schedule':
               returnStyles.color = 'gray';
               break;
-            case 'pending': 
+            case 'pending':
               returnStyles.color = 'green';
               break;
-            case 'completed': 
+            case 'completed':
               returnStyles.color = 'blue';
               break;
-            case 'reject': 
+            case 'reject':
               returnStyles.color = 'red';
               break;
           }
@@ -51,11 +70,11 @@ const WarehousingFlow = () => {
               <p>{dayjs(items.date).format('HH:MM:ss')}</p>
               <p>{items.text}</p>
             </Timeline.Item>
-          )
+          );
         })}
       </Timeline>
-    </div>  
+    </div>
   );
-}
+};
 
 export default WarehousingFlow;
