@@ -285,3 +285,25 @@ h6 {
     }
   }
 }
+
+.signupPopup {
+  max-width: 32rem;
+  background: white;
+  margin: 2.5rem auto;
+  padding: 2rem;
+}
+
+.signupPopup[data-isShownSignUp='true'] {
+  position: fixed;
+  z-index: 50;
+  // transform: translateX(-50%) !important;
+  top: 0;
+  // left: 50%;
+  margin: 0;
+  padding: 0;
+  max-width: none;
+  border-radius: 0;
+  width: 50%;
+  min-width: 600px;
+  height: 100%;
+}

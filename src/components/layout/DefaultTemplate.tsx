@@ -13,7 +13,7 @@ const DefaultTemplate = ({ children }: LayoutProps) => {
   return (
     <div
       className={
-        'flex w-full ' + (router.pathname !== `/` ? 'h-[100vh]' : 'h-full')
+        'flex w-full ' + (router.pathname !== `/` ? 'h-[100vh]' : 'min-h-[100vh] h-full')
       }
     >
       <LeftMenu />

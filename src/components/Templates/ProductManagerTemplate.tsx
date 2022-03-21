@@ -1,18 +1,18 @@
 import { Button, ButtonGroup } from '@material-ui/core';
 import Radio from '@mui/material/Radio';
 import React, { useEffect, useState } from 'react';
+import { login } from '../../DAO/auth/login';
+import { getProductList } from '../../DAO/productList/getProductList';
 
 import { productListMocks } from '../../mocks/productList';
 import { productListType } from '../../mocks/productList/type';
-import StylingMeterialInput from '../Atoms/input/StylingMeterialInput';
-import PopupContainer from '../Molecules/popup/PopupContainer';
+import ProductPopup from '../Organisms/popups/ProductPopup';
 
 const ProductManagerTemplate = () => {
   const [selectedValue, setSelectedValue] = React.useState('');
   const handleChange = (event: {
     target: { value: React.SetStateAction<string> };
   }) => {
-    console.log('event', event);
     setSelectedValue(event.target.value);
   };
   const [isShownPopup, setShowPopup] = useState(false);
@@ -40,75 +40,14 @@ const ProductManagerTemplate = () => {
     },
   };
 
+  useEffect(() => {
+    login();
+    getProductList();
+  }, []);
+
   return (
     <>
-      <PopupContainer
-        isShown={isShownPopup}
-        title={popupTitle}
-        onClose={handleClickEvent.registProduct}
-        className='w-[600px]'
-      >
-        <StylingMeterialInput
-          id='standard-basic'
-          label='바코드 번호'
-          variant='standard'
-          className='w-full'
-          inputProps={{ inputMode: 'numeric', pattern: '[0-9]*' }}
-          sx={{
-            marginTop: '0',
-          }}
-        />
-        <StylingMeterialInput
-          id='standard-basic'
-          label='상품명'
-          variant='standard'
-          className='w-full'
-          sx={{
-            marginTop: '30px',
-          }}
-        />
-        <StylingMeterialInput
-          id='standard-basic'
-          label='옵션명'
-          variant='standard'
-          className='w-full'
-          sx={{
-            marginTop: '30px',
-          }}
-        />
-        <StylingMeterialInput
-          id='standard-basic'
-          label='패키지 단위'
-          variant='standard'
-          className='w-full'
-          sx={{
-            marginTop: '30px',
-          }}
-        />
-        <StylingMeterialInput
-          id='standard-basic'
-          label='낱개 단위'
-          variant='standard'
-          className='w-full'
-          sx={{
-            marginTop: '30px',
-          }}
-        />
-        <StylingMeterialInput
-          id='standard-basic'
-          label='입고 수량'
-          variant='standard'
-          className='w-full'
-          sx={{
-            marginTop: '30px',
-          }}
-        />
-        <div className='mt-8'>
-          <Button variant='contained' color='primary'>
-            {popupTitle}
-          </Button>
-        </div>
-      </PopupContainer>
+      <ProductPopup isShown={isShownPopup} title={popupTitle} onCloseEvent={handleClickEvent.togglePopup} />
       <div className='btnGroup pb-8 '>
         <ButtonGroup
           aria-label='contained primary button group'
