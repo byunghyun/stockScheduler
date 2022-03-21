@@ -33,7 +33,7 @@ export interface currentStatusType {
     today: number;
     yesterday: number;
   };
-  [prop:string]: any;
+  [prop: string]: any;
 }
 
 export interface dashBoardType {

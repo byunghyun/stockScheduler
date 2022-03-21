@@ -1,32 +1,72 @@
+// .eslintrc.js
 module.exports = {
-    env: {
-      // 전역 변수 사용을 정의합니다. 추가하지 않으면 ESLint 규칙에 걸리게 됩니다.
-      browser: true,
-      es6: true,
-      node: true,
-    },
-    extends: [
-      "eslint:recommended",
-      "plugin:react/recommended",
-      "plugin:@typescript-eslint/recommended", // 해당 플러그인의 권장 규칙을 사용합니다.
-    ],
-    parser: "@typescript-eslint/parser", // ESLint 파서를 지정합니다.
-    parserOptions: {
-      ecmaFeatures: {
-        jsx: true, // JSX를 파싱할 수 있습니다.
+  root: true,
+  env: {
+    node: true,
+    es6: true,
+  },
+  parser: '@typescript-eslint/parser',
+  parserOptions: { ecmaVersion: 8 }, // to enable features such as async/await
+  ignorePatterns: ['node_modules/*', '.next/*', '.out/*', '/public/*'], // We don't want to lint generated files nor node_modules, but we want to lint .prettierrc.js (ignored by default by eslint)
+  plugins: ['@typescript-eslint', 'prettier'],
+  extends: [
+    'eslint:recommended',
+    'plugin:@typescript-eslint/recommended', // TypeScript rules
+    'plugin:react/recommended', // React rules
+    'plugin:react-hooks/recommended', // React hooks rules
+    'plugin:jsx-a11y/recommended', // Accessibility rules
+    'prettier',
+    'plugin:prettier/recommended',
+  ],
+  overrides: [
+    // This configuration will apply only to TypeScript files
+    {
+      files: ['**/*.ts', '**/*.tsx'],
+      parser: '@typescript-eslint/parser',
+      settings: { react: { version: 'detect' } },
+      env: {
+        browser: true,
+        node: true,
+        es6: true,
       },
-      ecmaVersion: 12, // Modern ECMAScript를 파싱할 수 있습니다.
-      sourceType: "module", // import, export를 사용할 수 있습니다.
-    },
-    plugins: ["react", "@typescript-eslint"],
-    rules: {
-      // ESLint 규칙을 지정합니다. extends에서 지정된 규칙을 덮어 쓸수도 있습니다.
-      "react/react-in-jsx-scope": "off",
-      "react/prop-types": "off",
-    },
-    settings: {
-      react: {
-        version: "detect", // 현재 사용하고 있는 react 버전을 eslint-plugin-react가 자동으로 감지합니다.
+      plugins: ['@typescript-eslint', 'prettier', 'simple-import-sort'],
+      extends: [
+        'eslint:recommended',
+        'plugin:@typescript-eslint/recommended', // TypeScript rules
+        'plugin:react/recommended',
+        'plugin:react-hooks/recommended', // React hooks rules
+        'plugin:jsx-a11y/recommended', // Accessibility rules
+        'prettier',
+        'plugin:prettier/recommended',
+      ],
+      rules: {
+        'simple-import-sort/imports': 'error',
+        'simple-import-sort/exports': 'error',
+
+        '@typescript-eslint/no-empty-function': 'off',
+
+        '@typescript-eslint/explicit-module-boundary-types': 'off',
+
+        '@typescript-eslint/explicit-function-return-type': 'off',
+        // We will use TypeScript's types for component props instead
+        'react/prop-types': 'off',
+        // No need to import React when using Ne xt.js
+        'react/react-in-jsx-scope': 'off',
+
+        // This rule is not compatible with Next.js's <Link /> components
+        'jsx-a11y/anchor-is-valid': 'off',
+
+        // Why would you want unused vars?
+        '@typescript-eslint/no-unused-vars': 'off',
+        'no-template-curly-in-string': 'error',
+        'object-curly-newline': 0,
+        // "import/named": ["error"],
+        'import/prefer-default-export': 'off',
+        'react/jsx-fragments': 'off',
+        'arrow-body-style': 'off',
+        // "@typescript-eslint/indent": ["error", 2, {"SwitchCase": 1}],
+        'no-undef': 'error',
       },
     },
-  };
+  ],
+};

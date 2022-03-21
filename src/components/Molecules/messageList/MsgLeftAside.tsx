@@ -1,4 +1,5 @@
-import React from 'react'
+import React from 'react';
+
 import MessageList from './MessageList';
 
 const MsgLeftAside = () => {
@@ -6,7 +7,7 @@ const MsgLeftAside = () => {
     <aside className=''>
       <MessageList />
     </aside>
-  )
-}
+  );
+};
 
 export default MsgLeftAside;

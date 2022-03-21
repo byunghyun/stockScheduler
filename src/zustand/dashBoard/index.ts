@@ -1,9 +1,10 @@
-import create from 'zustand';
-import _ from 'lodash';
 import produce from 'immer';
+import _ from 'lodash';
+import create from 'zustand';
+
 import { dashBoardType } from './types';
 
-export const useDashboardStore = create<dashBoardType>(set => ({
+export const useDashboardStore = create<dashBoardType>((set) => ({
   outOfStockList: [],
   todayMainSchedule: [],
   weekChartData: [],
@@ -25,16 +26,28 @@ export const useDashboardStore = create<dashBoardType>(set => ({
       yesterday: 0,
     },
   },
-  setOutOfStockListData: (data) => set(produce((draft) => {
-    if (_.isArray(data)) draft.outOfStockList = data
-  })),
-  setTodayMainSchedule: (data) => set(produce((draft) => {
-    if (_.isArray(data)) draft.todayMainSchedule = data
-  })),
-  setWeekChartData: (data) => set(produce((draft) => {
-    if (_.isArray(data)) draft.weekChartData = data
-  })),
-  setCurrentStatus: (data) => set(produce((draft) => {
-    if (_.isObject(data)) draft.currentStatus = data
-  })),
+  setOutOfStockListData: (data) =>
+    set(
+      produce((draft) => {
+        if (_.isArray(data)) draft.outOfStockList = data;
+      }),
+    ),
+  setTodayMainSchedule: (data) =>
+    set(
+      produce((draft) => {
+        if (_.isArray(data)) draft.todayMainSchedule = data;
+      }),
+    ),
+  setWeekChartData: (data) =>
+    set(
+      produce((draft) => {
+        if (_.isArray(data)) draft.weekChartData = data;
+      }),
+    ),
+  setCurrentStatus: (data) =>
+    set(
+      produce((draft) => {
+        if (_.isObject(data)) draft.currentStatus = data;
+      }),
+    ),
 }));

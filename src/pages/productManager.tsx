@@ -1,10 +1,9 @@
-import React from 'react'
-import ProductManagerTemplate from '../components/Templates/ProductManagerTemplate'
+import React from 'react';
+
+import ProductManagerTemplate from '../components/Templates/ProductManagerTemplate';
 
 const ProductManager = () => {
-  return (
-    <ProductManagerTemplate />
-  )
-}
+  return <ProductManagerTemplate />;
+};
 
-export default ProductManager
+export default ProductManager;

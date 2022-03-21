@@ -1,10 +1,9 @@
-import React from 'react'
+import React from 'react';
+
 import Scheduler from '../components/Templates/SchedulerTemplate';
 
 const Schedule = () => {
-  return (
-    <Scheduler />
-  )
+  return <Scheduler />;
 };
 
-export default Schedule
+export default Schedule;
