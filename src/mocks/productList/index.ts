@@ -1,4 +1,4 @@
-import { productListType } from './type';
+import { productListType } from "../../entries";
 
 export const productListMocks: Array<productListType> = [
   {

@@ -1,29 +1,23 @@
 import { Button, ButtonGroup } from '@material-ui/core';
-import Radio from '@mui/material/Radio';
-import React, { useEffect, useState } from 'react';
-import { login } from '../../DAO/auth/login';
+import React, { useCallback, useEffect, useState } from 'react';
 import { getProductList } from '../../DAO/productList/getProductList';
 
-import { productListMocks } from '../../mocks/productList';
-import { productListType } from '../../mocks/productList/type';
 import ProductPopup from '../Organisms/popups/ProductPopup';
 
+import _ from 'lodash';
+import RadioButtonTable from '../Molecules/table/RadioButtonTable';
+import { SupabaseRealtimePayload } from '@supabase/supabase-js';
+import { runSupabase } from '../../service/initializeSuapbase';
+import { RealTimeProductList } from '../../DAO/productList/RealTimeProductList';
+import { useProductListStore } from '../../zustand/productList';
+import { ProductListType } from '../../entries';
+
 const ProductManagerTemplate = () => {
-  const [selectedValue, setSelectedValue] = React.useState('');
-  const handleChange = (event: {
-    target: { value: React.SetStateAction<string> };
-  }) => {
-    setSelectedValue(event.target.value);
-  };
+  console.log('init');
+  
+  const { productList, setProductList } = useProductListStore();
   const [isShownPopup, setShowPopup] = useState(false);
   const [popupTitle, setPopupTitle] = useState('');
-  const controlProps = (item: string) => ({
-    checked: selectedValue === item,
-    onChange: handleChange,
-    value: item,
-    name: 'productManagerList',
-    inputProps: { 'aria-label': item },
-  });
   const handleClickEvent = {
     registProduct: (event: { preventDefault: () => void }) => {
       event.preventDefault();
@@ -40,9 +34,49 @@ const ProductManagerTemplate = () => {
     },
   };
 
+  const matchData = {
+    productList: useCallback((data: Array<ProductListType>): void => {
+      setProductList(data);
+    }, []),
+  }
+  const handleRecord = {
+    realTimeProductListCallBack: {
+      insert: (payload: SupabaseRealtimePayload<ProductListType>) => {
+        console.log('payload', payload);
+        console.log('productList', productList);
+        if (payload.errors) return console.log(payload.errors);
+        const cloneProductList = _.cloneDeep(productList);
+        console.log('cloneProductList', cloneProductList);
+        cloneProductList.push(payload.new);
+        console.log('cloneProductList', cloneProductList);
+        matchData.productList(cloneProductList);
+      },
+      update: (payload: SupabaseRealtimePayload<ProductListType>) => {
+        console.log('payload ', payload);
+      },
+      delete: (payload: SupabaseRealtimePayload<ProductListType>) => {
+        console.log('payload ', payload);
+      },
+    }
+  }
   useEffect(() => {
-    login();
-    getProductList();
+    console.log('productList!!!', productList);
+    window.addEventListener('click', () => {
+      console.log('productList###', productList);
+    })
+  }, [productList]);
+  useEffect(() => {
+    getProductList(matchData.productList);
+    const RealTimeProductListSingleTon = new RealTimeProductList();
+    RealTimeProductListSingleTon.initProductListSubscription(
+      handleRecord.realTimeProductListCallBack.insert,
+      handleRecord.realTimeProductListCallBack.update,
+      handleRecord.realTimeProductListCallBack.delete,
+    );
+
+    return () => {
+      RealTimeProductListSingleTon.disableProductListSubscription();
+    }
   }, []);
 
   return (
@@ -73,50 +107,17 @@ const ProductManagerTemplate = () => {
           상품 관리
         </header>
         <div className='h-full overflow-y-auto'>
-          <table className='w-full listTable flex-1'>
-            <thead>
-              <tr>
-                <th className='sticky z-10 top-0'>선택</th>
-                <th className='sticky z-10 top-0'>글 번호</th>
-                <th className='sticky z-10 top-0'>상품 번호</th>
-                <th className='sticky z-10 top-0'>바코드 번호</th>
-                <th className='sticky z-10 top-0'>상품명</th>
-                <th className='sticky z-10 top-0'>옵션명</th>
-                <th className='sticky z-10 top-0'>패키지 단위</th>
-                <th className='sticky z-10 top-0'>패키지 당 낱개</th>
-                <th className='sticky z-10 top-0'>낱개 단위</th>
-              </tr>
-            </thead>
-            <tbody>
-              {productListMocks.map((item: productListType, index: number) => {
-                return (
-                  <tr key={item.productIndex.toString()}>
-                    <td>
-                      <Radio
-                        {...controlProps(item.productIndex.toString())}
-                        sx={{
-                          color: '#6366f1',
-                          '&.Mui-checked': {
-                            color: '#6366f1',
-                          },
-                        }}
-                      />
-                    </td>
-                    <td>{index + 1}</td>
-                    <td>{item.productNumber}</td>
-                    <td>{item.barcodeNumber}</td>
-                    <td>{item.productName}</td>
-                    <td>
-                      {item.productOption ? item.productOption : '미등록'}
-                    </td>
-                    <td>{item.packageUnit}</td>
-                    <td>{item.packageMinUnitQuan}</td>
-                    <td>{item.minimunUnit}</td>
-                  </tr>
-                );
-              })}
-            </tbody>
-          </table>
+          <RadioButtonTable columns={[
+            { field: 'radio', headerName: '선택' },
+            { field: 'index', headerName: '글 번호' },
+            { field: 'productNumber', headerName: '상품 번호' },
+            { field: 'barcodeNumber', headerName: '바코드 번호' },
+            { field: 'productName', headerName: '상품명' },
+            { field: 'productOption', headerName: '옵션명' },
+            { field: 'packageUnit', headerName: '패키지 단위' },
+            { field: 'packageMinUnitQuan', headerName: '패키지 당 낱개' },
+            { field: 'minimumUnit', headerName: '낱개 단위' },
+          ]} rows={productList} />
         </div>
       </div>
     </>

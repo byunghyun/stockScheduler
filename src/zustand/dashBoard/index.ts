@@ -2,9 +2,9 @@ import produce from 'immer';
 import _ from 'lodash';
 import create from 'zustand';
 
-import { dashBoardType } from './types';
+import { dashBoardZustandType } from './type';
 
-export const useDashboardStore = create<dashBoardType>((set) => ({
+export const useDashboardStore = create<dashBoardZustandType>((set) => ({
   outOfStockList: [],
   todayMainSchedule: [],
   weekChartData: [],

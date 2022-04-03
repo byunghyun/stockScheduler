@@ -9,13 +9,16 @@ import 'antd/dist/antd.css';
 
 import type { AppProps } from 'next/app';
 import { useRouter } from 'next/router';
+import { Provider } from 'react-supabase'
 
-import DefaultTemplate from '../components/layout/DefaultTemplate';
-import Header from '../components/layout/Header';
+import DefaultTemplate from '../components/Layout/DefaultTemplate';
+import Header from '../components/Layout/Header';
+import { runSupabase } from '../service/initializeSuapbase';
 
 function MyApp({ Component, pageProps }: AppProps) {
   const router = useRouter();
   return (
+    // <Provider value={runSupabase}>
     <Header>
       {router.pathname !== '/login' ? (
         <DefaultTemplate>
@@ -25,6 +28,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         <Component {...pageProps} />
       )}
     </Header>
+    // </Provider>
   );
 }
 

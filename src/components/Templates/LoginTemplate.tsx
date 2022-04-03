@@ -37,21 +37,32 @@ const Login = () => {
           }
           <motion.main
             layout
-            data-isShownSignUp={isShownSignUp}
+            data-signUp={isShownSignUp}
             transition={{ duration: .3 }}
             className={'shadow-2xl signupPopup rounded-lg'}>
               {
                 isShownSignUp ? (
                   <motion.div layout className='flex flex-col h-full'>
-                    <div className='pb-4'>
-                      <button className='mt-4 ml-4' onClick={handleClickEvent.toggleSignUp}>
+                    <div className='relative flex flex-row mt-4 mx-4 mb-4 h-[24px]'>
+                      <button className='relative z-[10]' onClick={handleClickEvent.toggleSignUp}>
                         <ArrowBackIcon />
                       </button>
+                      <p className='absolute w-full flex-1 text-center text-[20px] leading-[24px]'>회원 가입</p>
                     </div>
-                    <div className='flex-1 p-8 overflow-y-auto'>
+                    <div className='flex flex-col justify-between flex-1 p-8 overflow-y-auto'>
                       <StylingMeterialInput
                         id='standard-basic'
-                        label='바코드 번호'
+                        label='이름'
+                        variant='standard'
+                        className='w-full'
+                        inputProps={{ inputMode: 'numeric', pattern: '[0-9]*' }}
+                        sx={{
+                          marginTop: '30px',
+                        }}
+                      />
+                      <StylingMeterialInput
+                        id='standard-basic'
+                        label='이메일 주소'
                         variant='standard'
                         className='w-full'
                         inputProps={{ inputMode: 'numeric', pattern: '[0-9]*' }}
@@ -61,38 +72,81 @@ const Login = () => {
                       />
                       <StylingMeterialInput
                         id='standard-basic'
-                        label='바코드 번호'
+                        label='비밀번호'
                         variant='standard'
                         className='w-full'
                         inputProps={{ inputMode: 'numeric', pattern: '[0-9]*' }}
                         sx={{
-                          marginTop: '30px',
+                          marginTop: '0',
                         }}
                       />
-                      <button onClick={async (event) => {
-                        event.preventDefault();
-                        try {
-                        const { user, session, error } = await runSupabase.auth.signUp(
-                          {
-                            email: 'eer3481@naver.com',
-                            password: 'test1234',
-                          },
-                          {
-                            data: {
-                              first_name: 'John', 
-                              age: 27,
+                      <StylingMeterialInput
+                        id='standard-basic'
+                        label='비밀번호 재확인'
+                        variant='standard'
+                        className='w-full'
+                        inputProps={{ inputMode: 'numeric', pattern: '[0-9]*' }}
+                        sx={{
+                          marginTop: '0',
+                        }}
+                      />
+                      <div className='flex flex-row'>
+                        <StylingMeterialInput
+                          id='standard-basic'
+                          label='휴대전화'
+                          variant='standard'
+                          className='w-full'
+                          inputProps={{ inputMode: 'numeric', pattern: '[0-9]*' }}
+                          sx={{
+                            marginTop: '0',
+                          }}
+                        />
+                        <button
+                          className='bg-white border keep-all border-purple-600 hover:bg-purple-100 text-purple-600 font-bold px-8 ml-4 rounded shadow-lg hover:shadow-xl transition duration-200'
+                        >
+                          인증
+                        </button>
+                      </div>
+                      <StylingMeterialInput
+                        id='standard-basic'
+                        label='인증번호'
+                        variant='standard'
+                        className='w-full'
+                        inputProps={{ inputMode: 'numeric', pattern: '[0-9]*' }}
+                        sx={{
+                          marginTop: '0',
+                        }}
+                      />
+                        <button
+                          onClick={async (event) => {
+                            event.preventDefault();
+                            try {
+                              const { user, session, error } = await runSupabase.auth.signUp(
+                                {
+                                  email: 'eer3481@naver.com',
+                                  password: 'test1234',
+                                },
+                                {
+                                  data: {
+                                    name: 'John', 
+                                    phoneNumber: '010-3300-5144',
+                                  }
+                                }
+                              );
+                              if(error) throw error;
+                              console.log('session', session);
+                              console.log('user', user);
+                            } catch(error) {
+                              console.log('error', error);
+                            } finally {
+                              console.log('finally', 'finally')
                             }
-                          }
-                        );
-                        if(error) throw error;
-                        console.log('user', user)
-                        } catch(error) {
-                          console.log('error', error);
-                        } finally {
-                          console.log('finally', 'finally')
-                        }
-
-                      }}>회원가입</button>
+    
+                          }}
+                          className='bg-purple-600 hover:bg-purple-700 text-white font-bold py-4 rounded shadow-lg hover:shadow-xl transition duration-200 mt-8'
+                        >
+                          회원가입
+                        </button>
                     </div>
                   </motion.div>
                 ) : (

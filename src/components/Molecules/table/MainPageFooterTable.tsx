@@ -30,17 +30,17 @@ const DenseTable = () => {
               </TableRow>
             </TableHead>
             <TableBody>
-              {outOfStockList.map((row) => (
+              {outOfStockList.map((outOfStock) => (
                 <TableRow
-                  key={row.productName}
+                  key={outOfStock.outOfStockIndex.toString()}
                   sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                 >
                   <TableCell component='th' scope='row'>
-                    {row.productName}
+                    {outOfStock.productName}
                   </TableCell>
-                  <TableCell align='right'>{row.totalStock}</TableCell>
-                  <TableCell align='right'>{row.weeklyShipments}</TableCell>
-                  <TableCell align='right'>{row.monthlyShipments}</TableCell>
+                  <TableCell align='right'>{outOfStock.totalStock}</TableCell>
+                  <TableCell align='right'>{outOfStock.weeklyShipments}</TableCell>
+                  <TableCell align='right'>{outOfStock.monthlyShipments}</TableCell>
                 </TableRow>
               ))}
             </TableBody>

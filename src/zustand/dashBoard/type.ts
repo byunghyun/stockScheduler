@@ -1,4 +1,5 @@
 interface outOfStockStateType {
+  outOfStockIndex: number;
   productName: string;
   totalStock: number;
   weeklyShipments: number;
@@ -36,7 +37,7 @@ export interface currentStatusType {
   [prop: string]: any;
 }
 
-export interface dashBoardType {
+export interface dashBoardZustandType {
   outOfStockList: Array<outOfStockStateType>;
   todayMainSchedule: Array<todayMainScheduleType>;
   weekChartData: Array<todayMainScheduleType>;
