@@ -11,6 +11,7 @@ import { runSupabase } from '../../service/initializeSuapbase';
 import { RealTimeProductList } from '../../DAO/productList/RealTimeProductList';
 import { useProductListStore } from '../../zustand/productList';
 import { ProductListType } from '../../entries';
+import { addProductObject } from '../../DAO/productList/addProductObject';
 
 const ProductManagerTemplate = () => {
   console.log('init');
@@ -18,6 +19,7 @@ const ProductManagerTemplate = () => {
   const { productList, setProductList } = useProductListStore();
   const [isShownPopup, setShowPopup] = useState(false);
   const [popupTitle, setPopupTitle] = useState('');
+  const RealTimeProductListSingleTon = new RealTimeProductList();
   const handleClickEvent = {
     registProduct: (event: { preventDefault: () => void }) => {
       event.preventDefault();
@@ -42,39 +44,52 @@ const ProductManagerTemplate = () => {
   const handleRecord = {
     realTimeProductListCallBack: {
       insert: (payload: SupabaseRealtimePayload<ProductListType>) => {
-        console.log('payload', payload);
-        console.log('productList', productList);
         if (payload.errors) return console.log(payload.errors);
         const cloneProductList = _.cloneDeep(productList);
-        console.log('cloneProductList', cloneProductList);
         cloneProductList.push(payload.new);
-        console.log('cloneProductList', cloneProductList);
         matchData.productList(cloneProductList);
       },
       update: (payload: SupabaseRealtimePayload<ProductListType>) => {
-        console.log('payload ', payload);
+        if (payload.errors) return console.log(payload.errors);
+        const updatedIndexNumber = payload.old.productIndex;
+        const cloneProductList = _.cloneDeep(productList);
+        const updatedProductObject = cloneProductList.findIndex((product, index) => {
+          return (
+            product.productIndex === updatedIndexNumber
+          )
+        });
+        cloneProductList[updatedProductObject] = payload.new;
+        matchData.productList(cloneProductList);
       },
       delete: (payload: SupabaseRealtimePayload<ProductListType>) => {
-        console.log('payload ', payload);
+        if (payload.errors) return console.log(payload.errors);
+        const deletedIndexNumber = payload.old.productIndex;
+        const cloneProductList = _.cloneDeep(productList);
+        const updatedProductList = cloneProductList.filter((product, index) => {
+          return (
+            product.productIndex !== deletedIndexNumber
+          )
+        });
+        matchData.productList(updatedProductList);
       },
     }
   }
   useEffect(() => {
-    console.log('productList!!!', productList);
-    window.addEventListener('click', () => {
-      console.log('productList###', productList);
-    })
-  }, [productList]);
-  useEffect(() => {
-    getProductList(matchData.productList);
-    const RealTimeProductListSingleTon = new RealTimeProductList();
+    console.info(`%c -init productList useEffect`, `color: green`);
     RealTimeProductListSingleTon.initProductListSubscription(
       handleRecord.realTimeProductListCallBack.insert,
       handleRecord.realTimeProductListCallBack.update,
       handleRecord.realTimeProductListCallBack.delete,
     );
-
+  }, [productList]);
+  useEffect(() => {
+    console.info(`%c -init default useEffect`, `color: green`);
+    getProductList(matchData.productList);
+    window.addEventListener('click', () => {
+      addProductObject();
+    });
     return () => {
+      console.info(`%c -cleanUp default useEffect`, `color: green`);
       RealTimeProductListSingleTon.disableProductListSubscription();
     }
   }, []);
