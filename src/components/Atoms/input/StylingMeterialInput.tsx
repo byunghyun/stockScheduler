@@ -32,6 +32,8 @@ interface StylingMeterialInputType {
   className?: string;
   sx?: SxProps<Theme>;
   inputProps?: InputBaseComponentProps;
+  value?: string | number;
+  onChange?: (event: { currentTarget: { value: string } }) => void;
 }
 
 const StylingMeterialInput = ({
@@ -41,6 +43,8 @@ const StylingMeterialInput = ({
   className,
   sx,
   inputProps,
+  value,
+  onChange,
 }: StylingMeterialInputType) => {
   return (
     <StylingTextField
@@ -50,6 +54,8 @@ const StylingMeterialInput = ({
       className={className}
       sx={sx}
       inputProps={inputProps}
+      value={value}
+      onChange={onChange}
     />
   );
 };
