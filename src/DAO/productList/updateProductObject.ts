@@ -4,17 +4,21 @@ import { runSupabase } from "../../service/initializeSuapbase";
 import { toastify } from "../../util/AlertToast";
 import { DAOTypes } from "../types";
 
-export const addProductObject = async (
-  newData?: Partial<ProductListType>,
+export const updateProductObject = async (
+  newData: Partial<ProductListType>,
+  selectedIndex: number,
   successEvent?: (() => void) | undefined, 
   failEvent?: (() => void) | undefined, 
   finallyEvent?: (() => void) | undefined
 ) => {
  try {
+   console.log('newData', newData);
+   console.log('selectedIndex', selectedIndex);
    const user = runSupabase.auth.user();
-   const { data, error, status }: PostgrestResponse<any> = await runSupabase
+   const { data, status, error } = await runSupabase
    .from('productList')
-   .insert([newData]);
+   .update(newData)
+   .match({ productIndex: selectedIndex })
    if (error && status !== 406) throw error;
    if (data) {
     toastify.success('상품 등록이 완료되었습니다.');

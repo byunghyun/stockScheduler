@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import Radio from '@mui/material/Radio';
 import { ProductListType } from '../../../entries';
+import { useProductListStore } from '../../../zustand/productList';
 
 const RadioButtonTable = ({
  tableTitle, 
@@ -15,19 +16,21 @@ const RadioButtonTable = ({
  className?: string,
  rest?: Array<string>,
 }) => {
+  const { selectedProductIndex, setSelectedProductIndex } = useProductListStore();
  console.log('rows', rows);
- const [selectedValue, setSelectedValue] = React.useState('');
  const handleChange = (event: {
-   target: { value: React.SetStateAction<string> };
+   target: { value: string };
  }) => {
-   setSelectedValue(event.target.value);
+   const changeSelected = parseInt(event.target.value);
+   setSelectedProductIndex(changeSelected);
  };
- const controlProps = (item: string) => ({
-   checked: selectedValue === item,
+ const controlProps = (item: number) => ({
+   checked: selectedProductIndex === item,
    onChange: handleChange,
-   value: item,
+   value: item.toString(),
    name: tableTitle ?? Math.random().toString(36).substr(2, 9),
-   inputProps: { 'aria-label': item },
+   // name값 공백 시 무작위로 넣어줌
+   inputProps: { 'aria-label': item.toString() },
  });
   return (
    <table className={`w-full listTable flex-1 ` + className} {...rest}>
@@ -54,7 +57,7 @@ const RadioButtonTable = ({
                  return (
                   <td key={columnsIndex.toString()}>
                     <Radio
-                      {...controlProps(item.productIndex.toString())}
+                      {...controlProps(item.productIndex)}
                       sx={{
                         color: '#6366f1',
                         '&.Mui-checked': {

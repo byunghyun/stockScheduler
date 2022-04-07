@@ -1,14 +1,25 @@
 export interface ProductListType {
- created_at: number | string;
- updated_at: number;
+ created_at: string;
+ createdDate: number;
+ updatedDate: number;
  productIndex: number;
- productNumber: number;
- barcodeNumber: string;
+ productNumber?: string;
+ barcodeNumber?: string;
  productName: string;
- productOption: string;
+ productOption?: string;
  packageUnit: string;
  packageMinUnitQuan: number;
- minimunUnit: string;
- processor: string;
+ minimumUnit: string;
+ processor: number;
  mallNumber: number;
 }
+
+// mallNumber: number, // AuthInfo에서 가져올 것
+// processor: number,  // AuthInfo에서 가져올 것
+// productNumber: string,
+// productName: string,
+// productOption: string,
+// barcodeNumber: string,
+// packageUnit: string,
+// packageMinUnitQuan: number,
+// minimumUnit: string,

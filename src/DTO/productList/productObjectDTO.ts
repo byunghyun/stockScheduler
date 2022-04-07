@@ -1,18 +1,19 @@
 import dayjs from 'dayjs';
 
 export class productObjectDTO {
- private mallNumber = 0;
- private processor = 0;
- private productNumber = '';
- private productName = '';
- private productOption = '';
- private barcodeNumber = '';
- private packageUnit = '';
- private packageMinUnitQuan = 0;
- private minimumUnit = '';
+ mallNumber = 0;
+ processor = 0;
+ createdDate = new Date().valueOf();
+ productNumber = '';
+ productName = '';
+ productOption = '';
+ barcodeNumber = '';
+ packageUnit = '';
+ packageMinUnitQuan = 0;
+ minimumUnit = '';
  constructor(
-  mallNumber: number,
-  processor: number,
+  mallNumber: number, // AuthInfo에서 가져올 것
+  processor: number,  // AuthInfo에서 가져올 것
   productNumber: string,
   productName: string,
   productOption: string,
