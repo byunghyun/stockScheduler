@@ -1,4 +1,4 @@
-## 주요 사용기술 - 기술 이름에 링크 연결해 두었습니다.
+## 주요 사용기술 
 - [React], [Next.js], [TailwindCSS], [Typescript], [supabase], [lodash], [Immer]
 
 ## 프로젝트 설명
