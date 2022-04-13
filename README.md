@@ -16,7 +16,7 @@
 - service는 db 연결부 혹은 차후 문자관련된 주요 기능들이 들어갑니다.
 - util에는 기타 부수적인 고통 기능들이 들어갑니다. 
 
-`
+```
 ### 기타 주요 폴더 구조
 📦DTO
  ┣ 📂productObjectDTO
@@ -46,4 +46,4 @@
 📦zustand
  ┃ 📜dashboard
  ┃ 📜productList
-`
+```
