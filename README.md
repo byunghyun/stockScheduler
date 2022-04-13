@@ -10,7 +10,8 @@
 - **_layout_**: layout high order compoent로 구성되어있는 layout compoenet입니다.
 
 프로젝트 개요
-- 라이브러리를 button, input 등의 ui는 사용하였고 그밖에는 제가 라이브러리처럼 만든 UI들입니다.
+- 대충보면 얘 라이브러리로 떡칠해놨네라고 보실 수도 있지만 input, button만 라이브러리를 사용하였고
+  테이블이나 다른 모든 것은 직접 라이브러리처럼 만들어놓은 것입니다.
 - view에서는 view와 view controll이 같이 있을 수 있지만 쿼리를 날리는 부분은 확실하게 별도로 구분하였습니다.
 - 재사용의 여지가 많은 기능은 util 혹은 service로 분류하였습니다.
 - service는 db 연결부 혹은 차후 문자관련된 주요 기능들이 들어갑니다.
