@@ -7,7 +7,7 @@
 - **_molecules_**: 단순히 나눈다의 개념이 아닌 디자인 시스템으로 재활용 할 수 있는 것 중에서 atoms보다 큰 개념입니다.
 - **_organisms_**: _molecules_보다 큰 개념의 디자인 시스템
 - **_templates_**: 페이지의 골격
-- **_layout_**: layout high order compoent로 구성되어있는 layout compoenet입니다.
+- **_layout_**: [Higher-Order-Component]로 구성되어있는 layout compoenet입니다.
 
 프로젝트 개요
 - 대충보면 얘 라이브러리로 떡칠해놨네라고 보실 수도 있지만 input, button만 라이브러리를 사용하였고
